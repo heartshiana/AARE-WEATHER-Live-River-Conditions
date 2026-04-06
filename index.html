@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AARE WEATHER — Live River Conditions</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══ NAVBAR ═══════════════════════════════════════════════════════════ -->
+  <nav class="navbar">
+    <div class="nav-logo"> AARE WEATHER</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#select-section">Forecast</a></li>
+      <li><a href="#weatherResult">Results</a></li>
+    </ul>
+    <a href="#select-section" class="nav-cta">Check Now →</a>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+
+    <!-- Left text -->
+    <div class="hero-text">
+      <div class="hero-badge">Real-Time Swiss River Data</div>
+      <h1 class="hero-title">
+        Live Water<br>&amp; Weather<br><em>Conditions.</em>
+      </h1>
+      <p class="hero-sub">
+        Instantly check air temperature, water temperature,
+        flow rates and weather conditions for rivers and lakes
+        across Switzerland. Powered by Aareguru.
+      </p>
+      <a href="#select-section" class="scroll-btn" aria-label="Scroll to selector">↓</a>
+    </div>
+
+    <!-- Right: decorative phone card -->
+    <div class="hero-right">
+      <div class="hero-phone-card">
+        <div class="phone-status">
+          <span><span class="phone-live-dot"></span>LIVE</span>
+          <span>9:41</span>
+        </div>
+        <div class="phone-app-row">
+          
+          <span class="phone-app-label">AARE WEATHER</span>
+        </div>
+        <div class="phone-city-name">Bern</div>
+        <div class="phone-stats">
+          <div class="phone-stat">
+            <span class="phone-stat-val">18.4°</span>
+            <span class="phone-stat-lbl">Air</span>
+          </div>
+          <div class="phone-stat">
+            <span class="phone-stat-val">15.1°</span>
+            <span class="phone-stat-lbl">Water</span>
+          </div>
+        </div>
+        <div class="phone-cta">今すぐ確認する →</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ TICKER ════════════════════════════════════════════════════════════ -->
+  <div class="ticker-strip" aria-hidden="true">
+    <div class="ticker-track">
+      <span> SWISS RIVERS</span><span>•</span>
+      <span> REAL-TIME DATA</span><span>•</span>
+      <span> TEMPERATURE</span><span>•</span>
+      <span> FLOW RATES</span><span>•</span>
+      <span> WEATHER</span><span>•</span>
+      <span> SWISS RIVERS</span><span>•</span>
+      <span>REAL-TIME DATA</span><span>•</span>
+      <span> TEMPERATURE</span><span>•</span>
+      <span> FLOW RATES</span><span>•</span>
+      <span> WEATHER</span><span>•</span>
+    </div>
+  </div>
+
+  <!-- ══ CITY SELECTOR ═════════════════════════════════════════════════════ -->
+  <section class="select-section" id="select-section">
+    <div class="select-inner">
+      <div class="section-label">/ SELECT LOCATION</div>
+      <h2 class="section-title">Choose Your City</h2>
+      <p class="section-sub">Pick a Swiss city to load live river and weather data.</p>
+
+      <div class="select-wrapper">
+        <select id="citySelect" class="city-select">
+          <option value="">Loading cities…</option>
+        </select>
+        <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+
+      <!-- Loading -->
+      <div id="loadingState" class="loading-state hidden" aria-live="polite">
+        <div class="spinner"></div>
+        <span>Fetching conditions…</span>
+      </div>
+
+      <!-- Error -->
+      <div id="errorState" class="error-state hidden" role="alert">
+        <div class="error-icon">⚠</div>
+        <p id="errorMsg">Something went wrong. Please try again.</p>
+        <button id="retryBtn" class="retry-btn">Try Again →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WEATHER RESULT ════════════════════════════════════════════════════ -->
+  <section id="weatherResult" class="weather-result hidden" aria-live="polite">
+
+    <!-- Yellow city banner -->
+    <div class="city-banner" id="cityBanner" data-city="">
+      <div class="city-banner-text">
+        <h2 id="cityName" class="city-name">–</h2>
+        <p id="weatherCondition" class="city-condition">–</p>
+      </div>
+      <div id="weatherEmoji" class="weather-emoji" aria-hidden="true">🌤</div>
+    </div>
+
+    <!-- White stats section -->
+    <div class="stats-section">
+      <div class="stats-grid">
+
+        <!-- Air Temp -->
+        <div class="stat-card" data-type="air">
+          <div class="stat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/>
+            </svg>
+          </div>
+          <span class="stat-label">Air Temperature</span>
+          <span id="airTemp" class="stat-value">–</span>
+          <div class="temp-bar"><div class="temp-fill" id="airTempFill"></div></div>
+        </div>
+
+        <!-- Water Temp -->
+        <div class="stat-card" data-type="water">
+          <div class="stat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 2C6 9 4 13.5 4 16a8 8 0 0 0 16 0c0-2.5-2-7-8-14z"/>
+            </svg>
+          </div>
+          <span class="stat-label">Water Temperature</span>
+          <span id="waterTemp" class="stat-value">–</span>
+          <div class="temp-bar water"><div class="temp-fill" id="waterTempFill"></div></div>
+        </div>
+
+        <!-- Flow Rate -->
+        <div class="stat-card" data-type="flow">
+          <div class="stat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M2 12s4-4 10-4 10 4 10 4-4 4-10 4S2 12 2 12z"/>
+              <path d="M2 6s4-2 10-2 10 2 10 2"/><path d="M2 18s4 2 10 2 10-2 10-2"/>
+            </svg>
+          </div>
+          <span class="stat-label">Flow Rate</span>
+          <span id="flowRate" class="stat-value">–</span>
+        </div>
+
+        <!-- Condition -->
+        <div class="stat-card" data-type="condition">
+          <div class="stat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+          </div>
+          <span class="stat-label">Condition</span>
+          <span id="conditionText" class="stat-value condition-val">–</span>
+        </div>
+
+      </div>
+
+      <p id="updatedAt" class="updated-at">–</p>
+    </div>
+
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-logo"> AARE WEATHER</div>
+    <p>Data via <a href="https://aareguru.existenz.ch" target="_blank" rel="noopener">Aareguru / Existenz</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
