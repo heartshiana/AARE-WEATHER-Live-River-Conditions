@@ -1,8 +1,8 @@
-AARE WEATHER — Live River Conditions
+# AARE WEATHER — Live River Conditions
 
 A modern Electron-based desktop application that displays real-time river and weather data across Switzerland. This app provides users with live insights into air temperature, water temperature, flow rates, and current weather conditions using the Aareguru API.
 
-Features
+# Features
 Live Swiss River Data
 Air & Water Temperature Monitoring
 Flow Rate Tracking
@@ -12,7 +12,7 @@ Fast & Lightweight (No API Key Required)
 Desktop App via Electron
 Preview
 
-The app includes:
+# The app includes:
 
 A bold hero landing page
 Interactive city selector
@@ -39,19 +39,19 @@ Run the app
 npm start
 API Reference
 
-This project uses:
+# This project uses:
 
 Aareguru API
 https://aareguru.existenz.ch
 
-Endpoints used:
+# Endpoints used:
 
 /cities → Fetch available locations
 /current?city={city} → Fetch live weather data
 
 No API key required.
 
-How It Works
+# How It Works
 On load, the app fetches available cities
 User selects a city from the dropdown
 The app retrieves:
@@ -76,10 +76,11 @@ Add more regions beyond Switzerland
 Mobile/web version
 Historical data charts
 Notifications for extreme conditions
-Author
+
+# Author
 
 Heart Shiana Ursua
 
-License
+# License
 
 This project is for educational and personal use.
